@@ -20,4 +20,8 @@ class Admin extends Authenticatable
         "hash_reset",
         "is_master"
     ];
+    public function thongTinAdmins()
+    {
+        return $this->hasMany(ThongTinAdmin::class, 'id_admin');
+    }
 }

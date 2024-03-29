@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateAdminRequest;
 use App\Models\Admin;
+use App\Models\ThongTinAdmin;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -13,20 +14,24 @@ class AdminController extends Controller
     {
         return view("admin.page.Login.login");
     }
-    public function info(){
+    public function info()
+    {
         $info = Auth::guard('admin')->user();
-        return view('admin.page.Admin.profile',compact('info'));
+        $data = ThongTinAdmin::where("id_admin",$info->id)->first();
+        return view('admin.page.Admin.profile', compact('info','data'));
     }
     public function checkLogin(Request $request)
     {
-        if (Auth::guard('admin')->attempt([
+        if (
+            Auth::guard('admin')->attempt([
                 'username' => $request->username,
-                'password' => $request->password]) ||
+                'password' => $request->password
+            ]) ||
             Auth::guard('admin')->attempt([
                 'email' => $request->username,
                 'password' => $request->password
-            ]))
-        {
+            ])
+        ) {
             return response()->json([
                 'status' => true,
             ]);
@@ -70,7 +75,8 @@ class AdminController extends Controller
     public function data()
     {
         try {
-            $data = Admin::get()->map(function ($index) {
+            $data = Admin::with('thongTinAdmins')->get();
+            $data = $data->map(function ($index){
                 $index->quyen = explode(",", $index->quyen);
                 return $index;
             });
@@ -85,6 +91,41 @@ class AdminController extends Controller
                 'message' => 'Thất Bại',
             ]);
         }
+    }
+    public function update(Request $request)
+    {
+        $data = ThongTinAdmin::where("id_admin", $request->id)->first();
+        if (!$data) {
+            ThongTinAdmin::create([
+                'facebook' => $request->facebook,
+                'mobile' => $request->mobile,
+                'messenger' => $request->messenger,
+                'zalo' => $request->zalo,
+                'twitter' => $request->twitter,
+                'instagram' => $request->instagram,
+                'github' => $request->github,
+                'dia_chi_1' => $request->dia_chi_1,
+                'dia_chi_2' => $request->dia_chi_2,
+                'id_admin' => $request->id,
+            ]);
+        } else {
+            $data->update([
+                'facebook' => $request->facebook,
+                'mobile' => $request->mobile,
+                'messenger' => $request->messenger,
+                'zalo' => $request->zalo,
+                'twitter' => $request->twitter,
+                'instagram' => $request->instagram,
+                'github' => $request->github,
+                'dia_chi_1' => $request->dia_chi_1,
+                'dia_chi_2' => $request->dia_chi_2,
+            ]);
+            $data->save();
+        }
+        return response()->json([
+            'status' => true,
+            'message' => 'Lưu Thông Tin Thành Công',
+        ]);
     }
     public function quyen(Request $request)
     {

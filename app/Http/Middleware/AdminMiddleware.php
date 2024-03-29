@@ -15,6 +15,7 @@ class AdminMiddleware
         if(Auth::guard("admin")->check()){
             return $next($request);
         }else{
+            toastr('Bạn cần đăng nhập trước','error',"Lỗi");
             return redirect("/admin/login");
         }
     }

@@ -51,6 +51,7 @@ Route::group(['prefix' => '/admin','middleware' => ['adminCheck']], function () 
     Route::group(['prefix' => '/admin'], function () {
         Route::get("/", [AdminController::class, 'index']);
         Route::get("/info",[AdminController::class,'info']);
+        Route::put("/updateInfo",[AdminController::class,'update']);
         Route::post("/add", [AdminController::class, 'add'])->middleware("isMaster");
         Route::post("/data", [AdminController::class, 'data']);
         Route::post("/delete/{id}", [AdminController::class, 'delete'])->middleware("isMaster");
