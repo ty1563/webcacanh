@@ -7,7 +7,7 @@
                 <div class="card">
                     <form v-on:submit.prevent="add()" id="formdata">
                         <div class="card-header">
-                            <h5>Thêm Mới Sản Phẩm</h5>
+                            <h5 style="text-shadow: 1px 1px 1px rgb(65, 167, 37)">Thêm Mới Sản Phẩm</h5>
                         </div>
                         <div class="card-body">
                             <div class="row">
@@ -115,7 +115,7 @@
                 <div class="card">
                     <form v-on:submit.prevent="update()" id="formdata2">
                         <div class="card-header">
-                            <h5>Cập Nhật Sản Phẩm : <span style="color: red">@{{ dataCapNhat.ten_san_pham }}</span></h5>
+                            <h5 style="text-shadow: 1px 1px 1px rgb(65, 167, 37)">Cập Nhật Sản Phẩm : <span style="color: red">@{{ dataCapNhat.ten_san_pham }}</span></h5>
                         </div>
                         <div class="card-body">
                             <div class="row">

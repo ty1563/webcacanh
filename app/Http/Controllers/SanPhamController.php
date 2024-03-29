@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateSanPhamRequest;
+use App\Models\DanhMuc;
 use App\Models\SanPham;
 use App\Models\SizeCustom;
 use Illuminate\Http\Request;
@@ -12,6 +13,11 @@ class SanPhamController extends Controller
 {
     public function index()
     {
+        $check = DanhMuc::count();
+        if ($check === 0) {
+            toastr("Bạn Cần Thêm Danh Mục Trước", 'error', "Lỗi");
+            return redirect()->route('danhMuc');
+        }
         return view("admin.page.SanPham.san-pham");
     }
     public function create(CreateSanPhamRequest $request)
@@ -104,7 +110,7 @@ class SanPhamController extends Controller
                     'status' => true,
                     'message' => 'Cập Nhật Thành Công',
                 ]);
-            }else{
+            } else {
                 $sanPham->update([
                     'ten_san_pham'      => $request->ten_san_pham,
                     'slug_san_pham'     => Str::slug($request->slug_san_pham),

@@ -5,7 +5,7 @@
             <form id="formdata" v-on:submit.prevent="add()">
                 <div class="card">
                     <div class="card-header">
-                        <h5>
+                        <h5 style="text-shadow: 1px 1px 1px rgb(65, 167, 37)">
                             Thêm Mới Chuyên Mục
                         </h5>
                     </div>
@@ -30,7 +30,7 @@
                 <div class="card-header">
                     <div class="row">
                         <div class="col-sm-8">
-                            <h5>
+                            <h5 style="text-shadow: 1px 1px 1px rgb(65, 167, 37)">
                                 Danh Sách Chuyên Mục
                             </h5>
                         </div>
@@ -69,7 +69,7 @@
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title">Cập Nhật Chuyên Mục : <span style="color:red;">@{{dataCapNhat.ten_chuyen_muc}}</span></h5>
+                                <h5 style="text-shadow: 1px 1px 1px rgb(65, 167, 37)" class="modal-title">Cập Nhật Chuyên Mục : <span style="color:red;">@{{dataCapNhat.ten_chuyen_muc}}</span></h5>
                             </div>
                             <div class="modal-body">
                                 <div class="mt-1">

@@ -62,6 +62,20 @@
                     <div class="menu-title">Sản Phẩm</div>
                 </a>
             </li>
+            <li class="nav-item">
+                <a href="/admin/kien-thuc" class="nav-link">
+                    <div class="parent-icon"><i class='bx bx-news'></i>
+                    </div>
+                    <div class="menu-title">Kiến Thức</div>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="/admin/admin" class="nav-link">
+                    <div class="parent-icon"><i class='bx bx-shield-alt-2'></i>
+                    </div>
+                    <div class="menu-title">Quản Lý Admin</div>
+                </a>
+            </li>
           </ul>
       </nav>
   </div>
