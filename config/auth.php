@@ -27,6 +27,10 @@ return [
             'driver' => 'session',
             'provider' => 'admin',
         ],
+        'khach' => [
+            'driver' => 'session',
+            'provider' => 'khach',
+        ],
     ],
 
     'providers' => [
@@ -37,6 +41,10 @@ return [
         'admin' => [
             'driver' => 'eloquent',
             'model' => App\Models\Admin::class,
+        ],
+        'khach' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\KhachHang::class,
         ],
 
     ],

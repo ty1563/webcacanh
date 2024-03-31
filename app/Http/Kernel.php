@@ -65,11 +65,14 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'adminCheck' => \App\Http\Middleware\AdminMiddleware::class,
+        'khachCheck' => \App\Http\Middleware\KhachHangMiddleware::class,
         'chuyenMucCheck' => \App\Http\Middleware\ChuyenMucMiddleware::class,
         'danhMucCheck' => \App\Http\Middleware\DanhMucMiddleware::class,
         'kienThucCheck' => \App\Http\Middleware\KienThucMiddleware::class,
         'sanPhamCheck' => \App\Http\Middleware\SanPhamMiddleware::class,
         'thuongHieuCheck' => \App\Http\Middleware\ThuongHieuMiddleware::class,
+        'khachHangCheck' => \App\Http\Middleware\KhachHangCheckMiddleware::class,
+        'voucherCheck' => \App\Http\Middleware\VoucherMiddleware::class,
         'isMaster' => \App\Http\Middleware\isMaster::class,
     ];
 }

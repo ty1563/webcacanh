@@ -58,9 +58,10 @@
                             </div>
                             <div class="row mt-1" v-show="size_active === 0">
                                 <div class="col-md-4">
-                                    <button type="button" style="border-radius: 5px;margin-top: 30px;" @click="size_active = 1">Kích Hoạt
-                                        Biến
-                                        Thể Size</button>
+                                    <label class="form-label">Biến Thể</label>
+                                    <button type="button" class="btn btn-danger" style="width: 100%;" @click="size_active = 1">Kích Hoạt
+                                        Giá Bán Cho Biến
+                                        Thể</button>
                                 </div>
                                 <div class="col-md-8">
                                     <label class="form-label">Giá Bán</label>
@@ -69,18 +70,23 @@
                                 </div>
                             </div>
                             <div class="row">
+                                <div class="col-md-8">
+                                    <label class="form-label">Giới Thiệu</label>
+                                    <textarea class="form-control" name="gioi_thieu" cols="30" rows="3"></textarea>
+                                </div>
                                 <div class="col-md-4">
                                     <label class="form-label">Xếp Hạng</label>
                                     <input type="number" class="form-control" name="xep_hang">
                                 </div>
                             </div>
+
                             <div class="row" v-show="size_active === 1">
                                 <div v-for="(bienThe, chiSo) in bienTheSize">
                                     <div class="row">
                                         <div class="col-md">
-                                            <label class="form-label">Kích Cỡ</label>
+                                            <label class="form-label">Biến Thể</label>
                                             <input class="form-control" type="text" v-model="bienThe.kichCo"
-                                                placeholder="Kích cỡ">
+                                                placeholder="Biến Thể">
                                         </div>
                                         <div class="col-md">
                                             <label class="form-label">Giá Bán</label>
@@ -90,8 +96,7 @@
                                     </div>
                                 </div>
                                 <div class="text-end mt-1">
-                                    <button type="button" style="border-radius: 5px;" @click="themBienThe()">Thêm Kích
-                                        Cỡ</button>
+                                    <button type="button" style="border-radius: 5px;" @click="themBienThe()">Thêm Biến Thể</button>
                                 </div>
                             </div>
                             <div class="m-1">
@@ -170,18 +175,23 @@
                                 </div>
                             </div>
                             <div class="row">
+                                <div class="col-md-8">
+                                    <label class="form-label">Giới Thiệu</label>
+                                    <textarea class="form-control" v-model="dataCapNhat.gioi_thieu" cols="30" rows="3"></textarea>
+                                </div>
                                 <div class="col-md-4">
                                     <label class="form-label">Xếp Hạng</label>
                                     <input type="number" class="form-control" v-model="dataCapNhat.xep_hang">
                                 </div>
+
                             </div>
                             <div class="row" v-show="dataCapNhat.size_active === 1">
                                 <div v-for="(bienThe1, chiSo1) in dataCapNhat.size_customs">
                                     <div class="row">
                                         <div class="col-md">
-                                            <label class="form-label">Kích Cỡ</label>
+                                            <label class="form-label">Biến Thể</label>
                                             <input class="form-control" type="text" v-model="bienThe1.size"
-                                                placeholder="Kích cỡ">
+                                                placeholder="Biến Thể">
                                         </div>
                                         <div class="col-md">
                                             <label class="form-label">Giá Bán</label>
@@ -469,6 +479,11 @@
 
         });
         CKEDITOR.replace('mo_ta');
+        CKEDITOR.replace('mo_ta_edit', {
+            filebrowserImageBrowseUrl: '/laravel-filemanager?type=Images',
+
+        });
+        CKEDITOR.replace('mo_ta_edit');
     </script>
     <script>
         var route_prefix = "/laravel-filemanager";

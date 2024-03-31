@@ -14,6 +14,7 @@ return new class extends Migration
             $table->string("ten_san_pham")->require;
             $table->string("slug_san_pham")->require;
             $table->string("hinh_anh",500)->require;
+            $table->string("gioi_thieu",2000)->nullable();
             $table->text("mo_ta")->require;
             $table->integer("gia_ban")->default(0);
             $table->string("xep_hang")->require;

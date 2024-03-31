@@ -14,6 +14,9 @@ class AdminController extends Controller
     {
         return view("admin.page.Login.login");
     }
+    public function home(){
+    return view("admin.page.ChuyenMuc.chuyen-muc");
+    }
     public function info()
     {
         $info = Auth::guard('admin')->user();

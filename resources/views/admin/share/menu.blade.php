@@ -70,10 +70,31 @@
                 </a>
             </li>
             <li class="nav-item">
+                <a href="/admin/thong-bao" class="nav-link">
+                    <div class="parent-icon"><i class='bx bx-mail-send'></i>
+                    </div>
+                    <div class="menu-title">Thông Báo</div>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="/admin/voucher" class="nav-link">
+                    <div class="parent-icon"><i class='bx bxs-discount'></i>
+                    </div>
+                    <div class="menu-title">Voucher</div>
+                </a>
+            </li>
+            <li class="nav-item">
                 <a href="/admin/admin" class="nav-link">
                     <div class="parent-icon"><i class='bx bx-shield-alt-2'></i>
                     </div>
-                    <div class="menu-title">Quản Lý Admin</div>
+                    <div class="menu-title">Admin</div>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="/admin/khach-hang" class="nav-link">
+                    <div class="parent-icon"><i class='bx bx-user'></i></i>
+                    </div>
+                    <div class="menu-title">Khách Hàng</div>
                 </a>
             </li>
           </ul>

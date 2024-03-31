@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('size_customs', function (Blueprint $table) {
             $table->id();
-            $table->integer("size")->require;
+            $table->string("size")->require;
             $table->integer("gia_ban")->require;
             $table->unsignedBigInteger('id_san_pham')->require;
             $table->foreign('id_san_pham')->references('id')->on('san_phams')->onDelete('cascade');

@@ -219,6 +219,14 @@
                                             <input type="checkbox" v-model="select.kien_thucs">
                                             Quản Lý Bài Viết Kiến Thức
                                         </label>
+                                        <label>
+                                            <input type="checkbox" v-model="select.khach_hangs">
+                                            Quản Lý Khách Hàng
+                                        </label>
+                                        <label>
+                                            <input type="checkbox" v-model="select.vouchers">
+                                            Quản Lý Voucher
+                                        </label>
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
