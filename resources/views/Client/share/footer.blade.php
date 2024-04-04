@@ -21,7 +21,7 @@
                             <li><a href="wishlist.html"><i class="zmdi zmdi-dot-circle"></i>My Wishlist</a></li>
                             <li><a href="cart.html"><i class="zmdi zmdi-dot-circle"></i>My Cart</a></li>
                             <li><a href="login.html"><i class="zmdi zmdi-dot-circle"></i>Sign In</a></li>
-                            <li><a href="checkout.html"><i class="zmdi zmdi-dot-circle"></i>Check out</a></li>
+                            <li><a href="/checkout"><i class="zmdi zmdi-dot-circle"></i>Check out</a></li>
                         </ul>
                     </div>
                 </div>

@@ -25,7 +25,7 @@
 												<li><a href="single-product-sidebar.html">Single Product Sidebar</a></li>
 												<li><a href="cart.html">Shopping Cart</a></li>
 												<li><a href="wishlist.html">Wishlist</a></li>
-												<li><a href="checkout.html">Checkout</a></li>
+												<li><a href="/checkout">Checkout</a></li>
 												<li><a href="order.html">Order</a></li>
 												<li><a href="login.html">login / Registration</a></li>
 												<li><a href="my-account.html">My Account</a></li>

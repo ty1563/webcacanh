@@ -16,4 +16,10 @@ class DanhMuc extends Model
         "xep_hang",
         'id_chuyen_muc',
     ];
+    public function sanPhams(){
+        return $this->hasMany(SanPham::class,'id_danh_muc');
+    }
+    public function chuyenMucs(){
+        return $this->belongsTo(ChuyenMuc::class);
+    }
 }

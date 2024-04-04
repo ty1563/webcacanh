@@ -9,7 +9,7 @@ class Helper {
 
         $result = '';
         if ($trieu > 0) {
-            $result .= $trieu . 'tr';
+            $result .= $trieu . 'Triệu';
         }
         if ($ngan > 0) {
             $result .= $ngan . 'k';

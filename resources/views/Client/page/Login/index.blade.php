@@ -69,7 +69,6 @@
             methods: {
                 login() {
                     this.loading = true;
-
                     $data = {
                             'username': this.username,
                             'password': this.password,

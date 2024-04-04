@@ -15,6 +15,7 @@ class Voucher extends Model
         "giam_gia",
         "het_han",
         "max_uses",
+        "id_user",
         "used",
         "status",
     ];

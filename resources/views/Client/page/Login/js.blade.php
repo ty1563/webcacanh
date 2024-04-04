@@ -39,6 +39,6 @@
         window.addEventListener('load', function() {
             setTimeout(function() {
                 document.querySelector('div.loader-fullscreen-wrapper').style.display = 'none';
-            }, 500); // 1.5 giây
+            }, 1500); // 1.5 giây
         });
     </script>

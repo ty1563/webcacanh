@@ -14,4 +14,7 @@ class ChuyenMuc extends Model
         "slug_chuyen_muc",
         "gioi_thieu",
     ];
+    public function danhMucs(){
+        return  $this->hasMany(DanhMuc::class,'id_chuyen_muc');
+    }
 }

@@ -49,7 +49,7 @@
 												</div>
 												<div class="cart-bottom  clearfix">
 													<a href="cart.html" class="button-one floatleft text-uppercase" data-text="View cart">View cart</a>
-													<a href="checkout.html" class="button-one floatright text-uppercase" data-text="Check out">Check out</a>
+													<a href="/checkout" class="button-one floatright text-uppercase" data-text="Check out">Check out</a>
 												</div>
 											</div>
 										</li>

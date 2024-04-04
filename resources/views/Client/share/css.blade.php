@@ -11,6 +11,7 @@
 <!-- Google Font -->
 <link href='https://fonts.googleapis.com/css?family=Lato:400,700,900' rel='stylesheet' type='text/css'>
 <link href='https://fonts.googleapis.com/css?family=Bree+Serif' rel='stylesheet' type='text/css'>
+<link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.6/dist/sweetalert2.min.css" rel="stylesheet">
 
 {{-- box icon  --}}
 <link rel="stylesheet" href="/boxicon/css/boxicons.min.css">

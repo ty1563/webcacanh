@@ -106,7 +106,18 @@ Route::group(['prefix' => '/admin', 'middleware' => ['adminCheck']], function ()
 
 // Client
 Route::get('/', [ClientController::class, 'index'])->name("trang_chu");
-
+// WishList
+Route::get('/wishlist', [ClientController::class, 'wishlist'])->name("wishlist");
+// List Product
+Route::get("/product",[ClientController::class,'product']);
+// Signal Product
+Route::get('/product/view/{slug}', [ClientController::class, 'sProduct'])->name("signal-product");
+// Checkout
+Route::get('/checkout', [ClientController::class, 'checkout'])->name("checkout");
+// Voucher
+Route::post("/voucher/{code}",[ClientController::class,'voucher']);
+// Blog
+Route::get("/blog-kien-thuc/view/{slug}",[ClientController::class,'sBlog'])->name('signal-blog');
 // Auth
 Route::get('/login', [AccountConTroller::class, 'login'])->name("login");
 Route::get('/logout', [AccountController::class, 'logout']);

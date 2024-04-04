@@ -22,9 +22,29 @@ class SanPham extends Model
         "id_danh_muc",
         "id_thuong_hieu",
     ];
+    public function scopeActive($query){
+        return $query->where("tinh_trang",1);
+    }
     public function sizeCustoms()
     {
         return $this->hasMany(SizeCustom::class, 'id_san_pham');
     }
+    public function danhMucs(){
+        return $this->belongsTo(DanhMuc::class,"id","id_san_pham");
+    }
 
+    public function minMaxGiaBan()
+    {
+        $minMaxGiaBan = $this->sizeCustoms->reduce(function ($carry, $item) {
+            if (!isset($carry['min']) || $item->gia_ban < $carry['min']) {
+                $carry['min'] = $item->gia_ban;
+            }
+            if (!isset($carry['max']) || $item->gia_ban > $carry['max']) {
+                $carry['max'] = $item->gia_ban;
+            }
+            return $carry;
+        }, []);
+
+        return $minMaxGiaBan;
+    }
 }

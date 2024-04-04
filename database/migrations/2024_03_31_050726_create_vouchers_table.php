@@ -19,6 +19,7 @@ return new class extends Migration
             $table->dateTime("het_han")->require;
             $table->integer("max_uses")->default(1000);
             $table->integer("used")->default(0);
+            $table->string("id_user")->default(0);
             $table->boolean("status")->require;
             $table->timestamps();
         });

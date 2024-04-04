@@ -20,4 +20,7 @@ class KienThuc extends Model
         'list_tag',
         'tinh_trang',
     ];
+    public function scopeActive($query){
+        return $query->where("tinh_trang",1);
+    }
 }
