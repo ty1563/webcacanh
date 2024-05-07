@@ -1,5 +1,27 @@
 @extends('Client.share.master')
 @section('noi_dung')
+<div class="heading-banner-area overlay-bg" style="background: rgba(0, 0, 0, 0) url('https://media.istockphoto.com/id/1220573371/photo/minimal-work-space-creative-flat-lay-photo-of-workspace-desk-top-view-office-desk-with-laptop.jpg?s=612x612&w=0&k=20&c=xmrSzPD4LCRhPD4L5TlttC88sSYe9Pc3J2ZnxCMzzyQ=') no-repeat scroll 0 0; background-size: cover;">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="heading-banner" >
+                    <div class="heading-banner-title">
+                        <h2>Bài Viết Về Kiến Thức</h2>
+                    </div>
+                    <div class="breadcumbs pb-15">
+                        @foreach (Breadcrumbs::generate() as $breadcrumb)
+                            @if (!is_null($breadcrumb->url) && !$loop->last)
+                                <li class="home"><a href="{{ $breadcrumb->url }}">{{ $breadcrumb->title }}</a></li>
+                            @else
+                                <li class="active">{!! $breadcrumb->title !!}</li>
+                            @endif
+                        @endforeach
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
     <!-- BLGO-AREA START -->
     <div class="blog-area blog-2 blog-details-area  pt-80 pb-80">
         <div class="container">

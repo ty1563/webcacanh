@@ -30,24 +30,24 @@
                       <div class="menu-title">Trang Thủ</div>
                   </a>
                   <ul class="dropdown-menu">
-                      <li> <a class="dropdown-item" href="/admin"><i class="bx bx-right-arrow-alt"></i>Trang Chủ</a>
+                      <li> <a class="dropdown-item" href="/admin/thong-ke"><i class="bx bx-right-arrow-alt"></i>Thống kê</a>
                       </li>
                   </ul>
               </li>
-              <li class="nav-item">
-                <a href="/admin/chuyen-muc" class="nav-link">
-                    <div class="parent-icon"><i class='bx bx-category'></i>
-                    </div>
-                    <div class="menu-title">Chuyên Mục</div>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="/admin/danh-muc" class="nav-link">
-                    <div class="parent-icon"><i class='bx bx-category-alt'></i>
-                    </div>
-                    <div class="menu-title">Danh Mục</div>
-                </a>
-            </li>
+              <li class="nav-item dropdown">
+                  <a href="#" class="nav-link dropdown-toggle dropdown-toggle-nocaret"
+                      data-bs-toggle="dropdown">
+                      <div class="parent-icon"><i class='bx bx-category'></i>
+                      </div>
+                      <div class="menu-title">Chuyên Mục</div>
+                  </a>
+                  <ul class="dropdown-menu">
+                      <li> <a class="dropdown-item" href="/admin/chuyen-muc"><i class="bx bx-right-arrow-alt"></i>Chuyên Mục</a>
+                      <li> <a class="dropdown-item" href="/admin/danh-muc"><i class="bx bx-right-arrow-alt"></i>Danh Mục</a>
+                      </li>
+                  </ul>
+              </li>
+
             <li class="nav-item">
                 <a href="/admin/thuong-hieu" class="nav-link">
                     <div class="parent-icon"><i class='bx bx-store-alt'></i>
@@ -70,10 +70,10 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a href="/admin/thong-bao" class="nav-link">
-                    <div class="parent-icon"><i class='bx bx-mail-send'></i>
+                <a href="/admin/don-hang" class="nav-link">
+                    <div class="parent-icon"><i class='bx bx-list-ul'></i>
                     </div>
-                    <div class="menu-title">Thông Báo</div>
+                    <div class="menu-title">Đơn Hàng</div>
                 </a>
             </li>
             <li class="nav-item">
@@ -97,6 +97,14 @@
                     <div class="menu-title">Khách Hàng</div>
                 </a>
             </li>
+            <li class="nav-item">
+                <a href="/admin/thong-bao" class="nav-link">
+                    <div class="parent-icon"><i class='bx bx-mail-send'></i>
+                    </div>
+                    <div class="menu-title">Thông Báo</div>
+                </a>
+            </li>
+
           </ul>
       </nav>
   </div>

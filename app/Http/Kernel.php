@@ -72,6 +72,7 @@ class Kernel extends HttpKernel
         'sanPhamCheck' => \App\Http\Middleware\SanPhamMiddleware::class,
         'thuongHieuCheck' => \App\Http\Middleware\ThuongHieuMiddleware::class,
         'khachHangCheck' => \App\Http\Middleware\KhachHangCheckMiddleware::class,
+        'donHangCheck' => \App\Http\Middleware\DonHangMiddleware::class,
         'voucherCheck' => \App\Http\Middleware\VoucherMiddleware::class,
         'isMaster' => \App\Http\Middleware\isMaster::class,
     ];

@@ -20,4 +20,7 @@ class KhachHang extends Authenticatable
         'hash_reset',
         'hash_active',
     ];
+    public function donHangs(){
+        return $this->hasMany(DonHang::class,'id_khach_hang','id');
+    }
 }

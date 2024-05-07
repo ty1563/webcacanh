@@ -14,14 +14,15 @@ class AdminController extends Controller
     {
         return view("admin.page.Login.login");
     }
-    public function home(){
-    return view("admin.page.ChuyenMuc.chuyen-muc");
+    public function home()
+    {
+        return redirect()->route("thong_ke");
     }
     public function info()
     {
         $info = Auth::guard('admin')->user();
-        $data = ThongTinAdmin::where("id_admin",$info->id)->first();
-        return view('admin.page.Admin.profile', compact('info','data'));
+        $data = ThongTinAdmin::where("id_admin", $info->id)->first();
+        return view('admin.page.Admin.profile', compact('info', 'data'));
     }
     public function checkLogin(Request $request)
     {
@@ -79,7 +80,7 @@ class AdminController extends Controller
     {
         try {
             $data = Admin::with('thongTinAdmins')->get();
-            $data = $data->map(function ($index){
+            $data = $data->map(function ($index) {
                 $index->quyen = explode(",", $index->quyen);
                 return $index;
             });

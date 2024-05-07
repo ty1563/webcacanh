@@ -33,11 +33,11 @@
                             <div class="mini-cart text-end">
                                 <ul>
                                     <li>
-                                        <a @mouseover="loadCart()" class="cart-icon" href="#">
+                                        <a class="cart-icon" href="/cart">
                                             <i class="zmdi zmdi-shopping-cart"></i>
                                             {{-- <span>@{{ listCart.length }}</span> --}}
                                         </a>
-                                        <div class="mini-cart-brief text-left">
+                                        {{-- <div class="mini-cart-brief text-left">
                                             <div class="cart-items">
                                                 <p class="mb-0">You have <span>@{{ listCart.length }} items</span> in
                                                     your shopping bag
@@ -67,12 +67,12 @@
                                                 <h5 class="mb-0">Tổng Tiền : <span>@{{ formatVND(tongTien) }}</span></h5>
                                             </div>
                                             <div class="cart-bottom  clearfix">
-                                                <a href="cart.html" class="button-one floatleft text-uppercase"
-                                                    data-text="View cart">View cart</a>
+                                                <a href="/cart" class="button-one floatleft text-uppercase"
+                                                    data-text="View cart">Wishlist</a>
                                                 <a href="/checkout" class="button-one floatright text-uppercase"
                                                     data-text="Check out">Check out</a>
                                             </div>
-                                        </div>
+                                        </div> --}}
                                     </li>
                                 </ul>
                             </div>
@@ -105,29 +105,28 @@
                                 </ul>
                             </div>
                         </li>
-                        <li><a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                        <li><a href="/product"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                     viewBox="0 0 24 24" style="fill: rgba(0, 0, 0, 1);transform: ;msFilter:;">
                                     <path
                                         d="M10 3H4a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4a1 1 0 0 0-1-1zM9 9H5V5h4v4zm11 4h-6a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-6a1 1 0 0 0-1-1zm-1 6h-4v-4h4v4zM17 3c-2.206 0-4 1.794-4 4s1.794 4 4 4 4-1.794 4-4-1.794-4-4-4zm0 6c-1.103 0-2-.897-2-2s.897-2 2-2 2 .897 2 2-.897 2-2 2zM7 13c-2.206 0-4 1.794-4 4s1.794 4 4 4 4-1.794 4-4-1.794-4-4-4zm0 6c-1.103 0-2-.897-2-2s.897-2 2-2 2 .897 2 2-.897 2-2 2z">
                                     </path>
                                 </svg>
-                                Danh Mục</a>
+                                Sản phẩm</a>
                             <div class="sub-menu menu-scroll">
                                 <ul>
-                                    <li class="menu-title">Danh Sách Danh Mục</li>
                                     @php
                                         $danhMuc = \App\Models\DanhMuc::get();
                                     @endphp
                                     @if (count($danhMuc) > 0)
                                         @foreach ($danhMuc as $value)
-                                            <li><a href="blog.html">{{ $value->ten_danh_muc }}</a></li>
+                                            <li><a href="/product?idDanhMuc={{$value->id}}">{{ $value->ten_danh_muc }}</a></li>
                                         @endforeach
                                     @endif
                                 </ul>
                             </div>
                         </li>
 
-                        <li><a href="blog.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                        <li><a href="/blog-kien-thuc"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                     viewBox="0 0 24 24" style="fill: rgba(0, 0, 0, 1);transform: ;msFilter:;">
                                     <path
                                         d="M19 2H6c-1.206 0-3 .799-3 3v14c0 2.201 1.794 3 3 3h15v-2H6.012C5.55 19.988 5 19.806 5 19s.55-.988 1.012-1H21V4c0-1.103-.897-2-2-2zm0 14H5V5c0-.806.55-.988 1-1h13v12z">

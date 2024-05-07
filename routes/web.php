@@ -5,10 +5,12 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ChuyenMucController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\DanhMucController;
+use App\Http\Controllers\DonHangController;
 use App\Http\Controllers\KhachHangController;
 use App\Http\Controllers\KienThucController;
 use App\Http\Controllers\SanPhamController;
 use App\Http\Controllers\ThongBaoController;
+use App\Http\Controllers\ThongKeController;
 use App\Http\Controllers\ThuongHieuController;
 use App\Http\Controllers\VoucherController;
 use App\Models\ThongBao;
@@ -22,6 +24,13 @@ Route::group(['prefix' => '/admin'], function () {
 Route::group(['prefix' => '/admin', 'middleware' => ['adminCheck']], function () {
     // Home
     Route::get("/", [AdminController::class, 'home']);
+    // Chuyên Mục
+    Route::group(['prefix' => '/thong-ke'], function () {
+        Route::get("/", [ThongKeController::class, 'index'])->name("thong_ke");
+        Route::post("/data-don-hang",[ThongKeController::class,'dataDonHang']);
+        Route::post("/data-chart", [ThongKeController::class, 'dataChart']);
+        
+    });
     // Chuyên Mục
     Route::group(['prefix' => '/chuyen-muc', 'middleware' => ['chuyenMucCheck']], function () {
         Route::get("/", [ChuyenMucController::class, 'index'])->name("chuyenMuc");
@@ -80,8 +89,16 @@ Route::group(['prefix' => '/admin', 'middleware' => ['adminCheck']], function ()
         Route::put("changePassword", [KhachHangController::class, 'changePassword']);
         Route::delete("/delete/{id}", [KhachHangController::class, 'delete']);
     });
+    // Khach Hang
+    Route::group(['prefix' => '/don-hang', 'middleware' => ['donHangCheck']], function () {
+        Route::get("/", [DonHangController::class, 'index']);
+        Route::post("/data", [DonHangController::class, 'data']);
+        Route::post("/change/thanh-toan/{hash}", [DonHangController::class, 'changeThanhToan']);
+        Route::post("/change/giao-hang/{hash}/{code}", [DonHangController::class, 'changeGiaoHang']);
+        Route::delete("/delete/{id}", [DonHangController::class, 'delete']);
+    });
     // Voucher
-    Route::group(['prefix' => '/voucher' ,'middleware' => ['voucherCheck']], function () {
+    Route::group(['prefix' => '/voucher', 'middleware' => ['voucherCheck']], function () {
         Route::get("/", [VoucherController::class, 'index']);
         Route::post("/create", [VoucherController::class, 'create']);
         Route::post("/data", [VoucherController::class, 'data']);
@@ -93,31 +110,36 @@ Route::group(['prefix' => '/admin', 'middleware' => ['adminCheck']], function ()
         Route::get("/", [ThongBaoController::class, 'index']);
         Route::post("/send-mail", [ThongBaoController::class, 'sendMail']);
         Route::post("/data", [ThongBaoController::class, 'data']);
-        Route::post("/clearData",[ThongBaoController::class,'clearData']);
-        Route::get("/status",function(){
+        Route::post("/clearData", [ThongBaoController::class, 'clearData']);
+        Route::get("/status", function () {
             return response()->json([
                 'status' => true,
-                'data'=>ThongBao::select("email")->orderBy("created_at","asc")->get(),
+                'data' => ThongBao::select("email")->orderBy("created_at", "asc")->get(),
             ]);
         });
     });
 });
 
-
 // Client
 Route::get('/', [ClientController::class, 'index'])->name("trang_chu");
-// WishList
-Route::get('/wishlist', [ClientController::class, 'wishlist'])->name("wishlist");
-// List Product
-Route::get("/product",[ClientController::class,'product']);
-// Signal Product
-Route::get('/product/view/{slug}', [ClientController::class, 'sProduct'])->name("signal-product");
-// Checkout
-Route::get('/checkout', [ClientController::class, 'checkout'])->name("checkout");
-// Voucher
-Route::post("/voucher/{code}",[ClientController::class,'voucher']);
-// Blog
-Route::get("/blog-kien-thuc/view/{slug}",[ClientController::class,'sBlog'])->name('signal-blog');
+Route::group(['middleware' => ['khachCheck']], function () {
+    //Blog
+    Route::get("/blog-kien-thuc", [ClientController::class, 'Blog'])->name('blog');
+    Route::get("/blog-kien-thuc/view/{slug}", [ClientController::class, 'sBlog'])->name('signal-blog');
+    // WishList
+    Route::get('/wishlist', [ClientController::class, 'wishlist'])->name("wishlist");
+    // List Product
+    Route::get("/product", [ClientController::class, 'product'])->name('product');
+    // Signal Product
+    Route::get('/product/view/{slug}', [ClientController::class, 'sProduct'])->name("signal-product");
+    // Checkout
+    Route::get('/cart', [ClientController::class, 'cart'])->name("cart");
+    Route::get('/checkout', [ClientController::class, 'checkout'])->name("checkout");
+    Route::post("/api/checkout/dat-hang/{id}", [ClientController::class, 'process']);
+    // Voucher
+    Route::post("/voucher/{code}", [ClientController::class, 'voucher']);
+});
+
 // Auth
 Route::get('/login', [AccountConTroller::class, 'login'])->name("login");
 Route::get('/logout', [AccountController::class, 'logout']);

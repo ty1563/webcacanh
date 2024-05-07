@@ -82,7 +82,7 @@ new Vue({
                 .then((res) => {
                  if(res.data.status){
                     toastr.success('Đăng Nhập Thành Công');
-                    window.location.href = '/admin/admin';
+                    window.location.href = '/admin/thong-ke';
                 } else {
                     this.alert = 'Tên Tài Khoản Hoặc Mật Khẩu Không Chính Xác';
                     toastr.error(this.alert);

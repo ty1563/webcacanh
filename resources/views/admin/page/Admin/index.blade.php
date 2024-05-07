@@ -227,6 +227,10 @@
                                             <input type="checkbox" v-model="select.vouchers">
                                             Quản Lý Voucher
                                         </label>
+                                        <label>
+                                            <input type="checkbox" v-model="select.don_hangs">
+                                            Quản Lý Đơn Hàng
+                                        </label>
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>

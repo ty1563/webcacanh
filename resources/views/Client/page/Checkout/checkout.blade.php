@@ -30,16 +30,23 @@
                     <div class="shopping-cart">
                         <!-- Nav tabs -->
                         <ul class="cart-page-menu nav row clearfix mb-30">
-                            <li style="width: 50%;"><a class="active" href="#check-out" data-bs-toggle="tab">check out</a>
+                            <li style="width: 33%;">
+                                <a href="/cart">Cart</a>
                             </li>
-                            <li style="width: 50%;"><a href="#order-complete" data-bs-toggle="tab">order complete</a></li>
+                            <li style="width: 33%;">
+                                <a :class="orderComplete == 0 ? 'active' : ''" href="#">check out</a>
+                            </li>
+                            <li style="width: 33%;">
+                                <a :class="orderComplete == 1 ? 'active' : ''" href="#">order complete</a>
+                            </li>
+
                         </ul>
 
                         <!-- Tab panes -->
                         <div class="tab-content">
                             <!-- check-out start -->
-                            <div class="tab-pane active" id="check-out">
-                                <form action="#">
+                            <div v-show="orderComplete == 0" class="tab-pane active" id="check-out">
+                                <form v-on:submit.prevent="datHang()" id="formdata">
                                     <div class="shop-cart-table check-out-wrap">
                                         <div class="row">
                                             <div class="col-md-6">
@@ -47,10 +54,11 @@
                                                     <h4 class="title-1 title-border text-uppercase mb-30">Thông Tin Giao
                                                         Hàng
                                                     </h4>
-                                                    <input type="text" placeholder="Tên Gọi...">
-                                                    <input type="text" placeholder="Email Liên Hệ...">
-                                                    <input type="text" placeholder="Số Điện Thoại Liên Hệ...">
-                                                    <select class="custom-select mb-15" id="city"
+                                                    <input type="text" name="ten" placeholder="Tên Gọi...">
+                                                    <input type="text" name="email" placeholder="Email Liên Hệ...">
+                                                    <input type="text" name="phone"
+                                                        placeholder="Số Điện Thoại Liên Hệ...">
+                                                    <select class="custom-select mb-15" id="city" name="city"
                                                         @change="fetchHuyen(),city=1">
                                                         <option value="" selected>Chọn tỉnh thành</option>
                                                         <template v-for="(v,k) in listCity">
@@ -58,19 +66,20 @@
                                                         </template>
                                                     </select>
                                                     <select v-show="city==1" class="custom-select mb-15" id="huyen"
-                                                        @change="fetchXa(),huyen=1">
+                                                        name="huyen" @change="fetchXa(),huyen=1">
                                                         <option value="" selected>Chọn quận huyện</option>
                                                         <template v-for="(v,k) in listHuyen">
                                                             <option :value="v.code">@{{ v.name }}</option>>
                                                         </template>
                                                     </select>
-                                                    <select v-show="huyen==1" class="custom-select mb-15" id="xa">
+                                                    <select v-show="huyen==1" class="custom-select mb-15" id="xa"
+                                                        name="xa">
                                                         <option value="" selected>Chọn phường xã</option>
                                                         <template v-for="(v,k) in listXa">
                                                             <option :value="v.code">@{{ v.name }}</option>>
                                                         </template>
                                                     </select>
-                                                    <textarea class="custom-textarea" placeholder="Địa Chỉ Cụ Thể..."></textarea>
+                                                    <textarea name="dia_chi_cu_the" class="custom-textarea" placeholder="Địa Chỉ Cụ Thể..."></textarea>
                                                 </div>
                                             </div>
                                             <div class="col-md-6 mt-xs-30">
@@ -93,11 +102,13 @@
                                                                 </tr>
                                                                 <tr>
                                                                     <td class="text-primary">Tổng Tiền</td>
-                                                                    <td class="text-end text-primary">@{{ formatVND(tongTien) }}</td>
+                                                                    <td class="text-end text-primary">@{{ formatVND(tongTien) }}
+                                                                    </td>
                                                                 </tr>
                                                                 <tr v-show="chietKhau!=0">
                                                                     <td class="text-primary">Chiết Khấu</td>
-                                                                    <td class="text-end text-primary">-@{{ formatVND(chietKhau) }}</td>
+                                                                    <td class="text-end text-primary">
+                                                                        -@{{ formatVND(chietKhau) }}</td>
                                                                 </tr>
                                                                 <tr v-show="chietKhau!=0">
                                                                     <td>Thành Tiền</td>
@@ -123,21 +134,30 @@
                                                         Toán
                                                     </h4>
                                                     <div class="payment-accordion">
-                                                        <!-- Accordion start  -->
-                                                        <h3 class="payment-accordion-toggle active">Thanh Toán Khi Nhận Hàng
+                                                        <h3 class="payment-accordion-toggle"
+                                                            :style="{
+                                                                border: selectedAccordion === 0 ? '1px solid red' :
+                                                                    'none'
+                                                            }"
+                                                            @click="methodSelected(0)">Thanh Toán Khi Nhận Hàng
                                                         </h3>
-                                                        <div class="payment-content default">
-                                                            <p>Nhận hàng kiểm tra và thanh toán , hỗ trợ hoàn trả trong 7
+                                                        <div class="payment-content default"
+                                                            v-show="selectedAccordion === 0">
+                                                            <p>Nhận hàng kiểm tra và thanh toán, hỗ trợ hoàn trả trong 7
                                                                 ngày.</p>
                                                         </div>
                                                         <!-- Accordion end -->
                                                         <!-- Accordion start -->
-                                                        <h3 class="payment-accordion-toggle">Thanh Toán Online</h3>
-                                                        <div class="payment-content">
-                                                            <p>Please send your cheque to Store Name, Store Street, Store
-                                                                Town, Store State / County, Store Postcode.</p>
+                                                        <h3 class="payment-accordion-toggle"
+                                                            :style="{
+                                                                border: selectedAccordion === 1 ? '1px solid red' :
+                                                                    'none'
+                                                            }"
+                                                            @click="methodSelected(1)">Thanh Toán Online
+                                                        </h3>
+                                                        <div class="payment-content" v-show="selectedAccordion === 1">
+                                                            <p>Chuyển tiền thanh toán trực tiếp bằng ngân hàng Việt Nam.</p>
                                                         </div>
-                                                        <!-- Accordion end -->
                                                         <!-- Accordion start -->
                                                         <button class="button-one submit-button mt-15"
                                                             data-text="place order" type="submit">Đặt Hàng</button>
@@ -148,31 +168,41 @@
                                     </div>
                                 </form>
                             </div>
-                            <!-- check-out end -->
+
                             <!-- order-complete start -->
-                            <div class="tab-pane" id="order-complete">
+                            <div v-show="orderComplete ==1">
                                 <form action="#">
                                     <div class="thank-recieve bg-white mb-30">
-                                        <p>Thank you. Your order has been received.</p>
+                                        <p>Cảm ơn . Đơn hàng của bạn đã được xác nhận.</p>
                                     </div>
                                     <div class="order-info bg-white text-center clearfix mb-30">
                                         <div class="single-order-info">
-                                            <h4 class="title-1 text-uppercase text-light-black mb-0">order no</h4>
-                                            <p class="text-uppercase text-light-black mb-0"><strong>m 2653257</strong></p>
+                                            <h4 class="title-1 text-uppercase text-light-black mb-0">Mã Đơn Hàng</h4>
+                                            <p class="text-uppercase text-light-black mb-0">
+                                                <strong>@{{ hash }}</strong>
+                                            </p>
+
                                         </div>
                                         <div class="single-order-info">
-                                            <h4 class="title-1 text-uppercase text-light-black mb-0">Date</h4>
-                                            <p class="text-uppercase text-light-black mb-0"><strong>june 15, 2021</strong>
+                                            <h4 class="title-1 text-uppercase text-light-black mb-0">Ngày Đặt Hàng</h4>
+                                            <p class="text-uppercase text-light-black mb-0">
+                                                <strong>@{{ date }}</strong>
                                             </p>
                                         </div>
                                         <div class="single-order-info">
-                                            <h4 class="title-1 text-uppercase text-light-black mb-0">Total</h4>
-                                            <p class="text-uppercase text-light-black mb-0"><strong>$ 170.00</strong></p>
+                                            <h4 class="title-1 text-uppercase text-light-black mb-0">Tổng Tiền Cần Thanh Toán
+                                            </h4>
+                                            <p class="text-uppercase text-light-black mb-0">
+                                                <strong>@{{ formatVND(thanhToan) }}</strong>
+                                            </p>
                                         </div>
                                         <div class="single-order-info">
-                                            <h4 class="title-1 text-uppercase text-light-black mb-0">payment method</h4>
-                                            <p class="text-uppercase text-light-black mb-0"><a
-                                                    href="#"><strong>check payment</strong></a></p>
+                                            <h4 class="title-1 text-uppercase text-light-black mb-0">Phương Thức Thanh Toán
+                                            </h4>
+                                            <p class="text-uppercase text-light-black mb-0">
+                                                <strong>@{{ phuongThuc }}</strong>
+                                            </p>
+
                                         </div>
                                     </div>
                                 </form>
@@ -200,16 +230,112 @@
                 xa: null,
                 maGiamGia: null,
                 city: null,
-                chietKhau : 0,
-                thanhTien : 0,
+                chietKhau: 0,
+                thanhTien: 0,
                 tongTien: 0,
+                orderComplete: @json($complete),
+                date : @json($date),
+                phuongThuc : @json($phuong_thuc),
+                hash : @json($hash),
+                thanhToan : @json($thanhToan),
+                clear : @json($clear),
                 id_user: "{{ Auth::guard('khach')->user() ? Auth::guard('khach')->user()->id : -1 }}",
+                selectedAccordion: 0,
             },
             created() {
+                if(this.clear==1){
+                    this.clearItemList();
+                }
                 this.loadCart();
                 this.fetchData();
             },
             methods: {
+                methodSelected(index) {
+                    this.selectedAccordion = index;
+                },
+                datHang() {
+                    let method = this.selectedAccordion;
+                    var diaChi = {};
+                    $.each($('#formdata').serializeArray(), function(_, kv) {
+                        if (diaChi.hasOwnProperty(kv.name)) {
+                            diaChi[kv.name] = $.makeArray(diaChi[kv.name]);
+                            diaChi[kv.name].push(kv.value);
+                        } else {
+                            diaChi[kv.name] = kv.value;
+                        }
+                    });
+                    diaChi.city = this.listCity.filter(item => item.code === diaChi.city)[0].name;
+                    diaChi.huyen = this.listHuyen.filter(item => item.code === diaChi.huyen)[0].name;
+                    diaChi.xa = this.listXa.filter(item => item.code === diaChi.xa)[0].name;
+                    var data = {
+                        'diaChi': diaChi,
+                        'maGiamGia': this.maGiamGia,
+                        'phuongThuc': 0,
+                        'listCart': this.listCart,
+                    }
+                    if (method == 1) {
+                        data.type = 1;
+                        axios
+                            .post('/api/checkout/dat-hang/' + this.id_user, data)
+                            .then((res) => {
+                                if (res.data.status) {
+                                    if (res.data.redirect) {
+                                        Swal.fire({
+                                            title: "Thành công!",
+                                            text: res.data.message,
+                                            icon: "success"
+                                        });
+                                        return setTimeout(() => {
+                                             window.location.href = res.data.redirect;
+                                        }, 1500);
+                                    }
+                                    this.orderComplete = 1;
+                                    this.hash = res.data.hash;
+                                    this.thanhToan = res.data.tongTien;
+                                    this.phuongThuc = res.data.phuongThuc;
+                                    this.date = res.data.date;
+                                    this.clearItemList();
+                                } else {
+                                    toastr.error(res.data.message);
+                                }
+                            })
+                            .catch((res) => {
+                                $.each(res.response.data.errors, function(k, v) {
+                                    toastr.error(v[0]);
+                                });
+                            });
+                    } else {
+                        data.type = 0;
+                        axios
+                            .post('/api/checkout/dat-hang/' + this.id_user, data)
+                            .then((res) => {
+                                if (res.data.status) {
+                                    Swal.fire({
+                                        title: "Thành công!",
+                                        text: res.data.message,
+                                        icon: "success"
+                                    });
+                                    this.orderComplete = 1;
+                                    this.hash = res.data.hash;
+                                    this.thanhToan = res.data.tongTien;
+                                    this.phuongThuc = res.data.phuongThuc;
+                                    this.date = res.data.date;
+                                    this.clearItemList();
+                                } else {
+                                    toastr.error(res.data.message);
+                                }
+                            })
+                            .catch((res) => {
+                                $.each(res.response.data.errors, function(k, v) {
+                                    toastr.error(v[0]);
+                                });
+                            });
+                    }
+
+                },
+                clearItemList() {
+                    localStorage.removeItem('itemList');
+                },
                 giamGia() {
                     axios
                         .post('/voucher/' + this.maGiamGia)
@@ -284,4 +410,5 @@
             },
         });
     </script>
+
 @endsection
